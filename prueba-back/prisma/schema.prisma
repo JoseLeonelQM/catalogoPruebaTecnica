@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js" // <-- Corregido con "-js" al final
+  // BORRAMOS la línea del output para que use la ruta estándar de node_modules
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 🔐 Definición de Roles para el control de accesos
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Hash de la contraseña (bcrypt)
+  name      String?
+  role      Role     @default(USER) // Por defecto, todos se registran como USER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relación: Un usuario puede crear muchos ítems
+  items     Item[]
+
+  @@map("users")
+}
+
+model Item {
+  id          String   @id @default(uuid())
+  name        String   // Nombre del producto
+  description String   // Descripción
+  price       Float    // Precio
+  category    String   // Categoría para los filtros
+  imageUrl    String   // URL de la imagen optimizada (Cloudinary/ImgBB)
+  createdAt   DateTime @default(now()) // Fecha de creación
+  updatedAt   DateTime @updatedAt
+
+  // Relación con el usuario que creó el registro
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("items")
+}
