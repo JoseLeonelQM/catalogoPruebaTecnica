@@ -6,11 +6,11 @@ import { upload } from '../middlewares/upload.middleware';
 
 const router = Router();
 
-// Públicas
+// Público
 router.get('/', getItems);
 
 
-// Solo ADMIN
+// Solo para usuarios admin
 router.post(
   '/',
   authenticateJWT,

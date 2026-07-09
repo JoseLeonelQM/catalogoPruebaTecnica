@@ -71,17 +71,12 @@ export default function ProductModal({ isOpen, editingItem, onClose, onSave }: P
     onSave(formData);
   };
 
-  // Condición lógica para saber si debemos mostrar la columna de la imagen
   const showImageColumn = editingItem && previewUrl;
 
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-
-      {/* El contenedor se adapta de tamaño automáticamente dependiendo de si muestra o no la imagen */}
       <div className={`relative w-full transform overflow-hidden rounded-2xl bg-(--color-surface) border border-(--color-border) p-6 shadow-xl transition-all animate-scale flex flex-col md:flex-row gap-6 ${showImageColumn ? 'max-w-2xl' : 'max-w-lg'}`}>
-        
-        {/* SECCIÓN IZQUIERDA: Solo se renderiza si estamos editando y hay URL */}
         {showImageColumn && (
           <div className="w-full md:w-52 shrink-0">
             <label className="block text-xs font-bold text-(--color-text-secondary) uppercase tracking-wider mb-2">
@@ -98,7 +93,6 @@ export default function ProductModal({ isOpen, editingItem, onClose, onSave }: P
           </div>
         )}
 
-        {/* SECCIÓN DERECHA: FORMULARIO (Se expande si no hay imagen a la izquierda) */}
         <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-4">
           <div>
             <h3 className="text-lg font-black text-(--color-text) tracking-tight">

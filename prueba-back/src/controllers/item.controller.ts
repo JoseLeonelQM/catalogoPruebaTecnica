@@ -14,7 +14,7 @@ export const createItem = async (req: AuthenticatedRequest, res: Response): Prom
   try {
     const { name, description, price, category } = req.body;
     const userId = req.user?.userId;
-    const file = req.file; // Aquí atrapamos el archivo gracias a Multer
+    const file = req.file; 
 
     if (!userId) {
       res.status(401).json({ message: 'Usuario no autenticado en el servidor' });
@@ -26,17 +26,15 @@ export const createItem = async (req: AuthenticatedRequest, res: Response): Prom
       return;
     }
 
-    // 🔥 Enviamos la imagen a Sharp y luego al Bucket de Supabase
     const imageUrl = await uploadAndOptimizeImage(file);
 
-    // 💾 Guardamos el producto en la base de datos de PostgreSQL usando la URL obtenida
     const newItem = await prisma.item.create({
       data: {
         name,
         description,
         price: parseFloat(price),
         category,
-        imageUrl, // URL pública guardada
+        imageUrl,
         userId,
       },
     });
@@ -52,9 +50,6 @@ export const createItem = async (req: AuthenticatedRequest, res: Response): Prom
 }
 };
 
-// Mantén tu función getItems abajo exactamente como la tenías en el paso anterior...
-
-// 📋 LISTAR ÍTEMS CON PAGINACIÓN, BÚSQUEDA Y FILTRO (GET)
 export const getItems = async (req: Request, res: Response): Promise<void> => {
   try {
     const { page = '1', limit = '10', search, category } = req.query;
@@ -63,7 +58,6 @@ export const getItems = async (req: Request, res: Response): Promise<void> => {
     const limitNumber = parseInt(limit as string);
     const skip = (pageNumber - 1) * limitNumber;
 
-    // Construcción dinámica de filtros de búsqueda
     const whereClause: any = {};
 
     if (category) {
@@ -77,7 +71,6 @@ export const getItems = async (req: Request, res: Response): Promise<void> => {
       ];
     }
 
-    // Consulta en paralelo para optimizar rendimiento
     const [items, totalItems] = await prisma.$transaction([
       prisma.item.findMany({
         where: whereClause,
@@ -101,11 +94,8 @@ export const getItems = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
-// 🔄 EDITAR ÍTEM (PUT)
 export const updateItem = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
-    // Forzamos que id sea interpretado estrictamente como un string para pasar el filtro exactOptionalPropertyTypes
     const id = req.params.id as string; 
     const { name, description, price, category } = req.body;
     const userId = req.user?.userId;
@@ -116,14 +106,12 @@ export const updateItem = async (req: AuthenticatedRequest, res: Response): Prom
       return;
     }
 
-    // 1. Verificar si el producto existe
     const existingItem = await prisma.item.findUnique({ where: { id } });
     if (!existingItem) {
       res.status(404).json({ message: 'Producto no encontrado' });
       return;
     }
 
-    // 2. Control de seguridad
     if (existingItem.userId !== userId) {
       res.status(403).json({ message: 'No tienes permisos para modificar este producto' });
       return;
@@ -134,7 +122,6 @@ export const updateItem = async (req: AuthenticatedRequest, res: Response): Prom
       imageUrl = await uploadAndOptimizeImage(file);
     }
 
-    // 4. Actualizar en la base de datos
     const updatedItem = await prisma.item.update({
       where: { id },
       data: {
@@ -152,10 +139,9 @@ export const updateItem = async (req: AuthenticatedRequest, res: Response): Prom
   }
 };
 
-// ❌ ELIMINAR ÍTEM (DELETE)
 export const deleteItem = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
-    const id = req.params.id as string; // Forzamos el casteo a string puro
+    const id = req.params.id as string; 
     const userId = req.user?.userId;
 
     if (!id) {

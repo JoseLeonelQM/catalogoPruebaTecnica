@@ -8,7 +8,8 @@ import CategoryDropdown from '../components/CategoryDropdwn';
 import type { User } from "../types/auth";
 import type { Item } from '../types';
 import ThemeToggle from '../components/ThemeToggle';
-
+import { Search, Plus, LogOut, Package, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import logoVertex from '../assets/VertexLogo.png'; 
 
 interface CatalogScreenProps {
   user: User;
@@ -30,7 +31,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
     totalPages: 1,
   });
 
-  // --- ESTADOS PARA LA CONFIRMACIÓN PERSONALIZADA ---
   const [confirmConfig, setConfirmConfig] = useState<{
     isOpen: boolean;
     title: string;
@@ -75,7 +75,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
     setPage(1);
   }, [search, category]);
 
-  // Manejo de Eliminación con el nuevo Modal
   const openDeleteConfirmation = (id: string) => {
     setConfirmConfig({
       isOpen: true,
@@ -97,7 +96,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
     });
   };
 
-  // Manejo de Cierre de Sesión con el nuevo Modal
   const openLogoutConfirmation = () => {
     setConfirmConfig({
       isOpen: true,
@@ -110,9 +108,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
       }
     });
   };
-
-
-
 
   const getPages = () => {
     const pages: (number | string)[] = [];
@@ -143,58 +138,59 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
 
   return (
     <div className="min-h-screen bg-(--color-bg) text-(--color-text) w-full pb-16 transition-colors duration-200 selection:bg-(--color-primary)/20">
-      
-      {/* NAVBAR SUPERIOR LIMPIA */}
       <header className="w-full bg-(--color-surface) border-b border-(--color-border) sticky top-0 z-50 shadow-sm backdrop-blur-md bg-opacity-95">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          
-          {/* Logo e Info de Usuario */}
-          <div className="flex items-center gap-4 truncate">
-            <div className="flex flex-col">
-              <h1 className="text-lg sm:text-xl font-black tracking-tight text-(--color-primary) whitespace-nowrap">
-                CÁTALOGO XYZ
-              </h1>
-              <div className="flex items-center gap-2 mt-0.5 text-xs text-(--color-text-secondary)">
-                <span className="truncate hidden sm:inline">Hola, <strong className="text-(--color-text) font-semibold">{user.name}</strong></span>
-                <span className="opacity-30 hidden sm:inline">|</span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-(--color-primary)/10 text-(--color-primary) font-bold text-[10px] tracking-wide uppercase">
-                  {user.role}
-                </span>
-              </div>
-            </div>
-          </div>
-          
-          {/* Controles del Sistema */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4"> 
+      <div className="flex items-center gap-3.5 shrink-0 select-none">
+        <div className="p-1.5 sm:p-2 rounded-xl transition-all duration-300 dark:bg-[#F8F9FA] dark:shadow-md dark:shadow-[#03070E]/50 flex items-center justify-center">
+          <img 
+            src={logoVertex} 
+            alt="Logo Vertex" 
+            className="h-7 w-auto sm:h-8 object-contain transition-transform hover:scale-105 duration-200"
+          />
+        </div>
+        <div className="h-6 w-px bg-(--color-border) opacity-60 hidden sm:block" />
+          <div className="flex items-center gap-2">
+            <h1 className="text-lg sm:text-xl font-black tracking-tight text-(--color-primary)">
+              Prueba Técnica
+            </h1>
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-(--color-primary)/10 text-(--color-primary) font-black text-[9px] tracking-wider uppercase border border-(--color-primary)/20 animate-pulse">
+            v1.0
+          </span>
+        </div>
+      </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <ThemeToggle />
-            
             <button
               onClick={openLogoutConfirmation}
-              className="btn bg-(--color-surface-hover) text-(--color-text) text-xs font-semibold h-10 px-4 rounded-xl border border-(--color-border) hover:bg-(--color-bg) transition-all"
+              className="btn bg-(--color-surface-hover) text-(--color-text) text-xs font-semibold h-10 px-4 rounded-xl border border-(--color-border) hover:bg-(--color-bg) transition-all flex items-center gap-2 cursor-pointer"
             >
-              Cerrar Sesión
+            <span>Cerrar Sesión</span>
+            <LogOut className="w-3.5 h-3.5 opacity-80" />
             </button>
           </div>
         </div>
       </header>
-
-      {/* CONTENIDO PRINCIPAL */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
-        
-        {/* ENCABEZADO DE SECCIÓN */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5 sm:mt-9">
         <div className="mb-6 sm:mb-8 text-center sm:text-left">
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Explorar Inventario</h2>
-          <p className="text-sm text-(--color-text-secondary) mt-1">
-            Administra, filtra y busca tus productos en tiempo real de forma eficiente.
-          </p>
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight flex flex-col sm:flex-row sm:items-center gap-2 justify-center sm:justify-start">
+          <span>¡Bienvenido, <strong className="text-(--color-text) font-semibold">{user.name}!</strong></span>
+          <span className="inline-flex items-center self-center px-2 py-0.5 rounded-full bg-(--color-primary)/10 text-(--color-primary) font-bold text-[10px] tracking-wide uppercase">
+            {user.role}
+          </span>
+        </h2>
+        <p className="text-sm text-(--color-text-secondary) mt-1.5">
+        {user.role === 'ADMIN' ? (
+          <>Explora y administra tu inventario.</>
+        ) : (
+          <>Descubre nuestros productos.</>
+        )}
+        </p>
         </div>
-
-        {/* FILTROS MEJORADOS (El botón de Añadir se movió aquí abajo) */}
         <div className="bg-(--color-surface) border border-(--color-border) rounded-2xl p-4 sm:p-5 mb-8 sm:mb-10 shadow-sm flex flex-col md:flex-row gap-4 items-stretch md:items-center">
-          
-          {/* Buscador */}
           <div className="flex-1 relative">
-            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-sm pointer-events-none opacity-50">🔍</span>
+            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-(--color-text-secondary) opacity-50">
+              <Search className="w-4 h-4" />
+            </span>
             <input
               type="text"
               placeholder="Buscar por nombre, detalles..."
@@ -203,8 +199,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
               className="w-full pl-10 pr-4 py-3 bg-(--color-bg) border border-(--color-border) text-(--color-text) rounded-xl text-sm placeholder-(--color-text-secondary)/40 focus:ring-2 focus:ring-(--color-primary)/20 focus:border-(--color-primary) focus:outline-none transition-all"
             />
           </div>
-
-          {/* Bloque de Categoría y Botón Añadir */}
           <div className="flex flex-col sm:flex-row gap-3 min-w-fit items-stretch sm:items-center">
             <div className="w-full sm:w-56"> 
               <CategoryDropdown 
@@ -218,24 +212,20 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
                   setEditingItem(null);
                   setIsModalOpen(true);
                 }}
-                className="btn bg-(--color-primary) hover:bg-(--color-primary-hover) text-white text-sm font-bold h-11 px-5 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all shrink-0"
+                className="btn bg-(--color-primary) hover:bg-(--color-primary-hover) text-white text-sm font-bold h-11 px-5 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all shrink-0 cursor-pointer"
               >
-                <span className="text-lg font-light leading-none">+</span>
+                <Plus className="w-4 h-4" />
                 <span>Añadir Producto</span>
               </button>
             )}
-            
           </div>
         </div>
-
-        {/* ERRORES */}
         {error && (
           <div className="mb-8 p-4 border border-(--color-danger)/20 bg-(--color-danger)/5 text-(--color-danger) rounded-xl text-sm font-semibold flex items-center gap-3 animate-scale">
-            <span>⚠️</span> {error}
+            <AlertTriangle className="w-5 h-5 shrink-0" /> 
+            <span>{error}</span>
           </div>
         )}
-
-        {/* CONTROL DE ESTADOS (LOADING / EMPTY / GRID) */}
         <div className="min-h-[45vh]">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-32 gap-4">
@@ -244,14 +234,13 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
             </div>
           ) : items.length === 0 ? (
             <div className="border-2 border-(--color-border) border-dashed text-center py-24 px-4 rounded-2xl bg-(--color-surface)/20 flex flex-col items-center justify-center">
-              <span className="text-4xl mb-3 opacity-60">📦</span>
+              <Package className="w-12 h-12 mb-3 text-(--color-text-secondary) opacity-60" />
               <h3 className="text-lg font-bold text-(--color-text)">No se encontraron productos</h3>
               <p className="text-sm text-(--color-text-secondary) mt-1 max-w-sm">
                 Intenta cambiando las palabras clave de tu búsqueda o seleccionando otra categoría.
               </p>
             </div>
           ) : (
-            /* Grilla Estilizada */
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 animate-fade">
               {items.map((item) => (
                 <ProductCard
@@ -268,23 +257,20 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
             </div>
           )}
         </div>
-        
-        {/* PAGINACIÓN */}
         {items.length > 0 && (
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5 mt-16 pt-8 border-t border-(--color-border)">
             <p className="text-xs sm:text-sm text-(--color-text-secondary) order-2 sm:order-1 font-medium">
               Mostrando <span className="font-bold text-(--color-text)">{startItem}-{endItem}</span> de <span className="font-bold text-(--color-text)">{meta.totalItems}</span> artículos
             </p>
-            
             <div className="flex items-center gap-1.5 order-1 sm:order-2 w-full sm:w-auto justify-between sm:justify-end">
               <button
                 disabled={page === 1}
                 onClick={() => setPage(page - 1)}
-                className="btn h-10 px-4 rounded-xl border border-(--color-border) bg-(--color-surface) hover:bg-(--color-surface-hover) disabled:opacity-30 disabled:pointer-events-none text-xs font-bold transition-all"
+                className="btn h-10 px-4 rounded-xl border border-(--color-border) bg-(--color-surface) hover:bg-(--color-surface-hover) disabled:opacity-30 disabled:pointer-events-none text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer"
               >
-                Anterior
+                <ChevronLeft className="w-4 h-4" />
+                <span>Anterior</span>
               </button>
-              
               <div className="hidden md:flex items-center gap-1.5">
                 {getPages().map((p, index) =>
                   p === "..." ? (
@@ -293,7 +279,7 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
                     <button
                       key={index}
                       onClick={() => setPage(Number(p))}
-                      className={`btn w-10 h-10 rounded-xl border text-xs font-bold transition-all ${
+                      className={`btn w-10 h-10 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                         page === p
                           ? "bg-(--color-primary) border-(--color-primary) text-white shadow-md"
                           : "bg-(--color-surface) border-(--color-border) hover:bg-(--color-surface-hover) text-(--color-text)"
@@ -304,20 +290,18 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
                   )
                 )}
               </div>
-              
               <button
                 disabled={page === meta.totalPages}
                 onClick={() => setPage(page + 1)}
-                className="btn h-10 px-4 rounded-xl border border-(--color-border) bg-(--color-surface) hover:bg-(--color-surface-hover) disabled:opacity-30 disabled:pointer-events-none text-xs font-bold transition-all"
+                className="btn h-10 px-4 rounded-xl border border-(--color-border) bg-(--color-surface) hover:bg-(--color-surface-hover) disabled:opacity-30 disabled:pointer-events-none text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer"
               >
-                Siguiente
+                <span>Siguiente</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
         )}
       </main>
-
-      {/* MODAL */}
       {user.role === "ADMIN" && isModalOpen && (
         <ProductModal
           isOpen={isModalOpen}
@@ -329,8 +313,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
           }}
         />
       )}
-
-      {/* MODAL GLOBAL DE CONFIRMACIÓN (REUTILIZABLE) */}
       <ConfirmModal
         isOpen={confirmConfig.isOpen}
         title={confirmConfig.title}
@@ -340,8 +322,6 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
         onConfirm={confirmConfig.onConfirm}
         onClose={() => setConfirmConfig(prev => ({ ...prev, isOpen: false }))}
       />
-
-
     </div>
   );
 }

@@ -16,10 +16,8 @@ export default function CategoryDropdown({ value, onChange }: CategoryDropdownPr
     { label: 'Hogar', value: 'Hogar' },
   ];
 
-  // Encontrar la etiqueta actual basada en el valor seleccionado
   const currentLabel = options.find((opt) => opt.value === value)?.label || 'Todas las Categorías';
 
-  // Cerrar el menú si el usuario hace clic fuera de él
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -32,8 +30,6 @@ export default function CategoryDropdown({ value, onChange }: CategoryDropdownPr
 
   return (
     <div ref={dropdownRef} className="relative w-full text-(--color-text)">
-      
-      {/* Botón Principal del Selector */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -44,8 +40,6 @@ export default function CategoryDropdown({ value, onChange }: CategoryDropdownPr
         }`}
       >
         <span className="truncate">{currentLabel}</span>
-        
-        {/* Flecha Animada (gira 180 grados al abrirse) */}
         <svg
           className={`w-4 h-4 text-(--color-text-secondary) opacity-70 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
@@ -57,8 +51,6 @@ export default function CategoryDropdown({ value, onChange }: CategoryDropdownPr
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-
-      {/* Lista Desplegable con Animación */}
       {isOpen && (
         <div className="absolute left-0 right-0 mt-2 z-50 overflow-hidden rounded-xl bg-(--color-surface) border border-(--color-border) shadow-lg shadow-black/10 animate-scale origin-top">
           <ul className="py-1 max-h-60 overflow-y-auto">

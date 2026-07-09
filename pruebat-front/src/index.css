@@ -1,22 +1,5 @@
-/* ==========================================================================
-   CONFIGURACIÓN PRINCIPAL DE TAILWIND & VARIABLES
-   ========================================================================== */
 @import "tailwindcss";
-
-/* 1. Tus variables primero para que Tailwind y tus clases las conozcan */
 @import "./styles/variables.css";
-
-/* ==========================================================================
-   ESTILOS GLOBALES Y RESETS
-   ========================================================================== */
-/* 2. Estilos base del HTML, Body, etc. */
 @import "./styles/globals.css";
-
-/* 3. Personalización del scrollbar */
 @import "./styles/scrollbar.css";
-
-/* ==========================================================================
-   ANIMACIONES Y COMPONENTES PROPIOS
-   ========================================================================== */
-/* 4. Tus animaciones y clases utilitarias personalizadas */
 @import "./styles/animations.css";

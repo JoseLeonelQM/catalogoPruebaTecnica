@@ -1,12 +1,11 @@
-# 📦 Catálogo XYZ
+# Prueba tecnica - Jose Leonel Quispe Mantilla
 
 Prueba Técnica Full Stack desarrollada para Vertex.
-
 Sistema de gestión de catálogo de productos con autenticación JWT, roles de usuario, CRUD completo, optimización de imágenes y almacenamiento en Supabase Storage.
 
 ---
 
-# 🚀 Tecnologías
+# Tecnologías
 
 ## Frontend
 
@@ -33,33 +32,6 @@ Sistema de gestión de catálogo de productos con autenticación JWT, roles de u
 
 ---
 
-# ✨ Características
-
-- Autenticación mediante JWT
-- Roles de usuario (ADMIN y USER)
-- CRUD completo de productos
-- Búsqueda por nombre/descripción
-- Filtro por categoría
-- Paginación
-- Optimización automática de imágenes
-- Conversión a WebP
-- Responsive
-- Validación de datos en servidor
-
----
-
-# 📂 Estructura del proyecto
-
-```
-catalogoPruebaTecnica/
-│
-├── prueba-back/
-│
-└── prueba-front/
-```
-
----
-
 # ⚙️ Instalación
 
 ## 1. Clonar el proyecto
@@ -80,24 +52,13 @@ cd prueba-back
 npm install
 ```
 
-Crear el archivo `.env` utilizando como referencia `.env.example`.
+OJO: TENER NODE.JS Y NPM ACTUALIZADO PARA EVITAR PROBLEMAS
+Crear el archivo `.env` utilizando como referencia `.env.example`, los mismos datos para accedes a mi base de datos supabase que esta levantado.
 
 Generar Prisma Client:
 
 ```bash
 npx prisma generate
-```
-
-Ejecutar migraciones:
-
-```bash
-npx prisma migrate deploy
-```
-
-Poblar la base de datos con datos de prueba:
-
-```bash
-npm run seed
 ```
 
 Iniciar servidor:
@@ -109,7 +70,11 @@ npm run dev
 Servidor:
 
 ```
-http://localhost:4000
+
+Tenemos tambien un archivo seed para ejecutar con datos poblados y un usuario y admin con 10 productos que se ejecuto al inicio:
+
+```bash
+npm run seed
 ```
 
 ---
@@ -138,26 +103,8 @@ http://localhost:5173
 
 ---
 
-# 🌱 Seed
 
-El proyecto incluye un **seed** que genera automáticamente información inicial para facilitar las pruebas.
-
-El seed realiza las siguientes acciones:
-
-- Elimina datos existentes.
-- Crea un usuario administrador.
-- Crea un usuario estándar.
-- Inserta productos de ejemplo.
-
-Ejecutar:
-
-```bash
-npm run seed
-```
-
----
-
-# 👤 Usuarios de prueba
+# Usuarios de prueba
 
 ## Administrador
 
@@ -205,7 +152,7 @@ Permisos:
 
 ---
 
-# 🖼️ Estrategia de optimización de imágenes
+# Estrategia de optimización de imágenes
 
 Se implementó una estrategia híbrida para optimizar el rendimiento y el almacenamiento.
 
@@ -227,7 +174,7 @@ La base de datos únicamente almacena la URL pública de la imagen.
 
 ---
 
-# 🔒 Seguridad
+# Seguridad
 
 - Autenticación mediante JWT.
 - Contraseñas cifradas con bcrypt.
@@ -238,7 +185,7 @@ La base de datos únicamente almacena la URL pública de la imagen.
 
 ---
 
-# 📌 API REST
+# API REST
 
 ## Auth
 
@@ -262,33 +209,8 @@ DELETE /api/items/:id
 
 ---
 
-# 📄 Variables de entorno
 
-## Backend
-
-```env
-DATABASE_URL=
-
-DIRECT_URL=
-
-JWT_SECRET=
-
-SUPABASE_URL=
-
-SUPABASE_SERVICE_ROLE_KEY=
-
-SUPABASE_BUCKET=imagesCatalog
-```
-
-## Frontend
-
-```env
-VITE_API_URL=http://localhost:4000/api
-```
-
----
-
-# 👨‍💻 Autor
+# Autor
 
 Jose Leonel Quispe Mantilla
 

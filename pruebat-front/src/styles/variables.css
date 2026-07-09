@@ -1,26 +1,26 @@
 :root {
-  /* Tema Claro */
-  --color-primary: #4F46E5;
-  --color-primary-hover: #4338CA;
-  --color-bg: #F8FAFC;
+  --color-primary: #139A9A;
+  --color-primary-hover: #0E7A7A;
+  --color-bg: #F8F9FA;
   --color-surface: #FFFFFF;
-  --color-surface-hover: #F1F5F9;
-  --color-text: #0F172A;
-  --color-text-secondary: #64748B;
-  --color-border: #E2E8F0;
+  --color-surface-hover: #F1F3F5;
+  --color-text: #0B2545;
+  --color-text-secondary: #4A5D73;
+  --color-border: #E5E9ED;
   --color-success: #22C55E;
   --color-danger: #EF4444;
 
   --radius: 16px;
-  --shadow: 0 8px 24px rgba(15, 23, 42, .08);
-  --shadow-lg: 0 12px 32px rgba(15, 23, 42, .12);
+  --shadow: 0 8px 24px rgba(11, 37, 69, .06);  
+  --shadow-lg: 0 12px 32px rgba(11, 37, 69, .10);
 }
 
 .dark {
-  --color-bg: #0B0F19;           /* Fondo general más elegante y profundo */
-  --color-surface: #151B2C;      /* Tarjetas y Header (resaltan sobre el fondo) */
-  --color-surface-hover: #1E2640;
-  --color-border: #222F4B;       /* Bordes oscuros pero visibles */
-  --color-text: #F8FAFC;
-  --color-text-secondary: #94A3B8;
+  --color-bg: #03070E;                
+  --color-surface: #0B131F;           
+  --color-surface-hover: #121E30;
+  --color-border: #1E2D42;            
+  
+  --color-text: #FFFFFF;             
+  --color-text-secondary: #E2E8F0;    
 }
