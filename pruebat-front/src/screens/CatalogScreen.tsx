@@ -303,13 +303,32 @@ export default function CatalogScreen({ user, onLogout }: CatalogScreenProps) {
         )}
       </main>
       {user.role === "ADMIN" && isModalOpen && (
-        <ProductModal
-          isOpen={isModalOpen}
-          editingItem={editingItem}
-          onClose={() => setIsModalOpen(false)}
-          onSave={() => {
-            setIsModalOpen(false);
-            fetchItems();
+      <ProductModal
+        isOpen={isModalOpen}
+        editingItem={editingItem}
+        onClose={() => setIsModalOpen(false)}
+        onSave={async (formData) => { 
+          try {
+            setError(''); 
+            if (editingItem) {
+              await API.put(`/items/${editingItem.id}`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+              });
+            } else {
+              await API.post('/items', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+              });
+            }
+            setIsModalOpen(false); 
+            fetchItems();         
+              } catch (err: unknown) {
+              if (err instanceof Error) {
+                const axiosError = err as AxiosError<{ message?: string }>; 
+                setError(axiosError.response?.data?.message || 'Error al intentar guardar el producto.');
+              } else {
+                setError('Ocurrió un error inesperado al guardar.');
+              }
+          }
           }}
         />
       )}
