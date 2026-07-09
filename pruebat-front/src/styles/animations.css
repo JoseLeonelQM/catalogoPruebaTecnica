@@ -1,0 +1,101 @@
+/* ===========================
+   ANIMACIONES
+=========================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade { animation: fadeUp .4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fade-in { animation: fadeIn .3s ease forwards; }
+.animate-scale { animation: scaleIn .25s ease forwards; }
+
+
+
+input, select {
+  box-sizing: border-box;
+}
+
+/* Modificadores globales fluidos */
+.header-shadow {
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
+}
+/* ===========================
+   TARJETAS (Solo para PRODUCTOS)
+=========================== */
+/* Eliminamos el comportamiento interactivo de la clase global .card 
+   para que no rompa los contenedores de la estructura (Header/Filtros) */
+.product-card {
+  background-color: var(--color-surface);
+  border: 1px border var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, border-color .25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+.btn {
+  transition: transform .2s, background .25s, color .25s, box-shadow .25s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+/* ===========================
+   INPUTS (Corregido var(--color-primary))
+=========================== */
+input, textarea, select {
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, .15) !important;
+}
+
+/* ===========================
+   IMÁGENES
+=========================== */
+img {
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover img {
+  transform: scale(1.03);
+}

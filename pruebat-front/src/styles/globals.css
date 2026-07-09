@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  /* Tema Claro */
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F1F5F9;
+  --color-text: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-border: #E2E8F0;
+  --color-success: #22C55E;
+  --color-danger: #EF4444;
+  --radius: 16px;
+}
+
+.dark {
+  /* Tema Oscuro */
+  --color-bg: #0B0F19;
+  --color-surface: #151B2C;
+  --color-surface-hover: #1E2640;
+  --color-border: #222F4B;
+  --color-text: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
+
+/* Clases de animación sencillas */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade {
+  animation: fadeUp 0.4s ease forwards;
+}

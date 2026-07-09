@@ -1,38 +1,22 @@
+/* ==========================================================================
+   CONFIGURACIÓN PRINCIPAL DE TAILWIND & VARIABLES
+   ========================================================================== */
 @import "tailwindcss";
 
-:root {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+/* 1. Tus variables primero para que Tailwind y tus clases las conozcan */
+@import "./styles/variables.css";
 
-  color: #111827;
-  background: #f9fafb;
+/* ==========================================================================
+   ESTILOS GLOBALES Y RESETS
+   ========================================================================== */
+/* 2. Estilos base del HTML, Body, etc. */
+@import "./styles/globals.css";
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
+/* 3. Personalización del scrollbar */
+@import "./styles/scrollbar.css";
 
-
-* {
-  box-sizing: border-box;
-}
-
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-
-button,
-input,
-textarea,
-select {
-  font-family: inherit;
-}
-
-
-#root {
-  min-height: 100vh;
-}
+/* ==========================================================================
+   ANIMACIONES Y COMPONENTES PROPIOS
+   ========================================================================== */
+/* 4. Tus animaciones y clases utilitarias personalizadas */
+@import "./styles/animations.css";

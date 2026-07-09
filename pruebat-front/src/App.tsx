@@ -2,8 +2,10 @@ import { useState } from 'react';
 import LoginScreen from './screens/LoginScreen';
 import CatalogScreen from './screens/CatalogScreen';
 import type { User } from './types/auth';
+import useTheme from './hooks/useTheme';
 
 export default function App() {
+  useTheme();
   const [token, setToken] = useState(
     localStorage.getItem('token') || ''
   );

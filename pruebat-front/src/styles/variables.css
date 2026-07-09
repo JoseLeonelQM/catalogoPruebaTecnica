@@ -1,0 +1,26 @@
+:root {
+  /* Tema Claro */
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F1F5F9;
+  --color-text: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-border: #E2E8F0;
+  --color-success: #22C55E;
+  --color-danger: #EF4444;
+
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(15, 23, 42, .08);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, .12);
+}
+
+.dark {
+  --color-bg: #0B0F19;           /* Fondo general más elegante y profundo */
+  --color-surface: #151B2C;      /* Tarjetas y Header (resaltan sobre el fondo) */
+  --color-surface-hover: #1E2640;
+  --color-border: #222F4B;       /* Bordes oscuros pero visibles */
+  --color-text: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+}
