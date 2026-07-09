@@ -1,12 +1,12 @@
 # 📦 Catálogo XYZ
 
-Prueba técnica Full Stack para Vertex.
+Prueba Técnica Full Stack desarrollada para Vertex.
 
-Aplicación web desarrollada con React + Express + Prisma + PostgreSQL que permite la gestión de un catálogo de productos con autenticación mediante JWT, roles de usuario, carga y optimización de imágenes, búsqueda, filtros y paginación.
+Sistema de gestión de catálogo de productos con autenticación JWT, roles de usuario, CRUD completo, optimización de imágenes y almacenamiento en Supabase Storage.
 
 ---
 
-# 🚀 Tecnologías utilizadas
+# 🚀 Tecnologías
 
 ## Frontend
 
@@ -27,121 +27,246 @@ Aplicación web desarrollada con React + Express + Prisma + PostgreSQL que permi
 - Multer
 - Sharp
 
-## Almacenamiento
+## Servicios
 
 - Supabase Storage
 
 ---
 
-# ✨ Funcionalidades
+# ✨ Características
 
-## Autenticación
+- Autenticación mediante JWT
+- Roles de usuario (ADMIN y USER)
+- CRUD completo de productos
+- Búsqueda por nombre/descripción
+- Filtro por categoría
+- Paginación
+- Optimización automática de imágenes
+- Conversión a WebP
+- Responsive
+- Validación de datos en servidor
 
-- Registro de usuarios
-- Inicio de sesión
-- JWT
-- Protección de rutas
-- Roles:
-  - ADMIN
-  - USER
+---
 
-## Catálogo
+# 📂 Estructura del proyecto
+
+```
+catalogoPruebaTecnica/
+│
+├── prueba-back/
+│
+└── prueba-front/
+```
+
+---
+
+# ⚙️ Instalación
+
+## 1. Clonar el proyecto
+
+```bash
+git clone <url-del-repositorio>
+
+cd catalogoPruebaTecnica
+```
+
+---
+
+## 2. Backend
+
+```bash
+cd prueba-back
+
+npm install
+```
+
+Crear el archivo `.env` utilizando como referencia `.env.example`.
+
+Generar Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Ejecutar migraciones:
+
+```bash
+npx prisma migrate deploy
+```
+
+Poblar la base de datos con datos de prueba:
+
+```bash
+npm run seed
+```
+
+Iniciar servidor:
+
+```bash
+npm run dev
+```
+
+Servidor:
+
+```
+http://localhost:4000
+```
+
+---
+
+## 3. Frontend
+
+```bash
+cd ../prueba-front
+
+npm install
+```
+
+Crear el archivo `.env` utilizando como referencia `.env.example`.
+
+Iniciar aplicación:
+
+```bash
+npm run dev
+```
+
+Aplicación:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 🌱 Seed
+
+El proyecto incluye un **seed** que genera automáticamente información inicial para facilitar las pruebas.
+
+El seed realiza las siguientes acciones:
+
+- Elimina datos existentes.
+- Crea un usuario administrador.
+- Crea un usuario estándar.
+- Inserta productos de ejemplo.
+
+Ejecutar:
+
+```bash
+npm run seed
+```
+
+---
+
+# 👤 Usuarios de prueba
+
+## Administrador
+
+**Correo**
+
+```
+admin@gmail.com
+```
+
+**Contraseña**
+
+```
+admin123*
+```
+
+Permisos:
 
 - Crear productos
 - Editar productos
 - Eliminar productos
-- Listar productos
-- Buscar por nombre o descripción
-- Filtrar por categoría
-- Paginación
-
-## Imágenes
-
-- Compresión en cliente
-- Optimización en servidor con Sharp
-- Conversión automática a WebP
-- Almacenamiento en Supabase Storage
-- En la base de datos únicamente se almacena la URL pública de la imagen.
+- Visualizar catálogo
 
 ---
 
-# 📂 Arquitectura
+## Usuario
 
-## Backend
-
-```
-src/
-│
-├── config/
-├── controllers/
-├── middlewares/
-├── routes/
-├── services/
-├── prisma/
-└── index.ts
-```
-
-## Frontend
+**Correo**
 
 ```
-src/
-│
-├── components/
-├── hooks/
-├── screens/
-├── services/
-├── types/
-├── utils/
-└── App.tsx
+user@gmail.com
 ```
+
+**Contraseña**
+
+```
+user123*
+```
+
+Permisos:
+
+- Consultar catálogo
+- Buscar productos
+- Filtrar productos
+- Navegar mediante paginación
 
 ---
 
-# 🖼 Estrategia de optimización de imágenes
+# 🖼️ Estrategia de optimización de imágenes
 
-Se implementó una estrategia híbrida.
+Se implementó una estrategia híbrida para optimizar el rendimiento y el almacenamiento.
 
 ## Cliente
 
-Antes de enviar la imagen se utiliza:
-
-- browser-image-compression
-
-Esto reduce el tamaño del archivo y disminuye el tiempo de subida.
+Antes de subir una imagen se utiliza **browser-image-compression**, reduciendo el tamaño del archivo y el tiempo de carga.
 
 ## Servidor
 
-Después de recibir la imagen se procesa utilizando Sharp:
+Posteriormente el backend procesa la imagen utilizando **Sharp**, aplicando:
 
-- Conversión a WebP
-- Calidad 80%
-- Redimensionado máximo de 800 px
-- Optimización para almacenamiento
+- Conversión automática a WebP.
+- Calidad 80%.
+- Redimensionado máximo de 800 px de ancho.
 
-Posteriormente la imagen optimizada se almacena en Supabase Storage.
+Finalmente la imagen optimizada se almacena en **Supabase Storage**.
 
-La base de datos únicamente guarda la URL generada por Supabase.
+La base de datos únicamente almacena la URL pública de la imagen.
 
 ---
 
-# 🔐 Seguridad
+# 🔒 Seguridad
 
-- JWT para autenticación.
+- Autenticación mediante JWT.
+- Contraseñas cifradas con bcrypt.
 - Middleware de autorización.
 - Validación de datos en servidor.
 - Variables de entorno.
-- Contraseñas cifradas mediante bcrypt.
-- Validación del propietario del recurso para editar y eliminar productos.
+- Validación de tipo y tamaño de imágenes.
 
 ---
 
-# ⚙ Variables de entorno
+# 📌 API REST
+
+## Auth
+
+```
+POST /api/auth/register
+
+POST /api/auth/login
+```
+
+## Productos
+
+```
+GET    /api/items
+
+POST   /api/items
+
+PUT    /api/items/:id
+
+DELETE /api/items/:id
+```
+
+---
+
+# 📄 Variables de entorno
 
 ## Backend
 
-Crear un archivo `.env`
-
-```
+```env
 DATABASE_URL=
 
 DIRECT_URL=
@@ -157,115 +282,9 @@ SUPABASE_BUCKET=imagesCatalog
 
 ## Frontend
 
-```
+```env
 VITE_API_URL=http://localhost:4000/api
 ```
-
----
-
-# ▶ Instalación
-
-## Backend
-
-```bash
-cd prueba-back
-
-npm install
-
-npx prisma generate
-
-npm run dev
-```
-
-Servidor:
-
-```
-http://localhost:4000
-```
-
----
-
-## Frontend
-
-```bash
-cd prueba-front
-
-npm install
-
-npm run dev
-```
-
-Aplicación:
-
-```
-http://localhost:5173
-```
-
----
-
-# 👥 Usuarios
-
-El sistema soporta dos tipos de usuarios.
-
-## ADMIN
-
-Puede:
-
-- Crear productos
-- Editar productos
-- Eliminar productos
-- Consultar catálogo
-
-## USER
-
-Puede:
-
-- Consultar catálogo
-- Buscar productos
-- Filtrar productos
-- Navegar mediante paginación
-
----
-
-# 📌 API
-
-## Auth
-
-```
-POST /api/auth/register
-
-POST /api/auth/login
-```
-
-## Items
-
-```
-GET    /api/items
-
-POST   /api/items
-
-PUT    /api/items/:id
-
-DELETE /api/items/:id
-```
-
----
-
-# 📸 Gestión de imágenes
-
-Las imágenes se almacenan en Supabase Storage.
-
-Formato:
-
-- WebP
-
-Optimización:
-
-- Sharp
-
-Base de datos:
-
-- URL pública únicamente
 
 ---
 
@@ -273,4 +292,4 @@ Base de datos:
 
 Jose Leonel Quispe Mantilla
 
-Prueba Técnica - Vertex
+Prueba Técnica Full Stack - Vertex
